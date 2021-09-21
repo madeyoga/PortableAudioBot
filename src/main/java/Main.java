@@ -14,10 +14,15 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import waiter.SearchCommandResponseWaiter;
 
 import javax.security.auth.login.LoginException;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws LoginException, DuplicateCommandException {
-        JDABuilder builder = JDABuilder.createDefault(System.getenv("NR_TOKEN"));
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your bot token: ");
+        String botToken = scanner.nextLine();
+
+        JDABuilder builder = JDABuilder.createDefault(botToken);
         configureMemoryUsage(builder);
 
         GuildAudioManager audioManager = new GuildAudioManager();
