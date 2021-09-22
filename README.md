@@ -1,5 +1,10 @@
 # PortableAudioBot
+[![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/madeyoga/portableaudiobot?style=for-the-badge)](https://www.codefactor.io/repository/github/madeyoga/portableaudiobot)
+[![contributionswelcome](https://img.shields.io/badge/contributions-welcome-brightgreen/?style=for-the-badge)](https://github.com/madeyoga/PortableAudioBot/issues)
+[![discord_invite](https://img.shields.io/discord/458296099049046018?style=for-the-badge)](https://discord.gg/Y8sB4ay)
+
 Completely free Music Discord bot designed to be portable and easy for anyone to host on their own machine.
+
 
 
 **Project is still in early access, bugs are to be expected.**
