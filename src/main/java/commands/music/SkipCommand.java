@@ -5,6 +5,7 @@ import guild.GuildAudioState;
 import interactions.SlashCommand;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import utilities.EventValidator;
 
 public class SkipCommand extends SlashCommand {
@@ -12,6 +13,7 @@ public class SkipCommand extends SlashCommand {
 
     public SkipCommand(GuildAudioManager audioManager) {
         this.audioManager = audioManager;
+        this.commandData = new CommandData("skip", "Skip current playing audio, only author can skip.");
     }
 
     @Override
@@ -20,11 +22,14 @@ public class SkipCommand extends SlashCommand {
 
         GuildAudioState audioState = audioManager.getAudioState(event.getGuild());
         String userId = (String) audioState.player.getPlayingTrack().getUserData();
-        if (!userId.equals(event.getUser().getId())) return;
+        if (!userId.equals(event.getUser().getId())) {
+            event.reply(":x: Only current audio requester can skip").queue();
+            return;
+        }
 
         audioState.scheduler.nextTrack();
 
-        event.reply(":musical_notes: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
+        event.reply(":musical_note: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
                 .queue();
     }
 
@@ -34,11 +39,15 @@ public class SkipCommand extends SlashCommand {
 
         GuildAudioState audioState = audioManager.getAudioState(event.getGuild());
         String userId = (String) audioState.player.getPlayingTrack().getUserData();
-        if (!userId.equals(event.getAuthor().getId())) return;
+
+        if (!userId.equals(event.getAuthor().getId())) {
+            event.getChannel().sendMessage(":x: Only current audio requester can skip");
+            return;
+        }
 
         audioState.scheduler.nextTrack();
 
-        event.getChannel().sendMessage(":musical_notes: Now playing: "
+        event.getChannel().sendMessage(":musical_note: Now playing: "
                 + audioState.player.getPlayingTrack().getInfo().title).queue();
     }
 }
