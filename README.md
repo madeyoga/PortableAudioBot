@@ -21,7 +21,7 @@ Run bot on your local machine
 [JDA MainWS-WriteThread] INFO WebSocketClient - Connected to WebSocket
 [JDA MainWS-ReadThread] INFO JDA - Finished Loading!
 ```
-- Go to Discord and you should see you bot online.
+- Go to Discord and you should see your bot online.
 
 ## Used tools
 - [JDA](https://github.com/DV8FromTheWorld/JDA)
