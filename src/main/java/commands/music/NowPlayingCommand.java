@@ -33,7 +33,7 @@ public class NowPlayingCommand extends SlashCommand {
         }
 
         String songName = playingTrack.getInfo().title;
-        event.getHook().sendMessage(":musical_note: Now playing: " + songName).queue();
+        event.reply(":musical_note: Now playing: " + songName).queue();
     }
 
     @Override
