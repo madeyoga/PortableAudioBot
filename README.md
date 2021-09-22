@@ -1,11 +1,29 @@
 # PortableAudioBot
 Completely free Music Discord bot designed to be portable and easy for anyone to host on their own machine.
 
+
 **Project is still in early access, bugs are to be expected.**
+
 
 ## Feature
 - Support slash command
 - Portable executable
+- Supported formats: https://github.com/sedmelluq/lavaplayer#supported-formats
+- Support 'search & pick to play'
+
+
+## Command List
+- join
+- song
+- pause
+- play
+- repeat
+- shuffle
+- skip
+- stop
+- volume
+- search
+
 
 ## Getting started
 Run bot on your local machine
@@ -22,6 +40,7 @@ Run bot on your local machine
 [JDA MainWS-ReadThread] INFO JDA - Finished Loading!
 ```
 - Go to Discord and you should see your bot online.
+
 
 ## Used tools
 - [JDA](https://github.com/DV8FromTheWorld/JDA)
