@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import models.UserIdentity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -59,7 +60,7 @@ public class GuildAudioManager implements IGuildAudioManager {
             @Override
             public void trackLoaded(AudioTrack track) {
                 play(author, audioState, track);
-                track.setUserData(event.getUser().getName());
+                track.setUserData(event.getUser().getId());
                 event.getHook().sendMessage(":musical_note: Added to queue: " + track.getInfo().title).queue();
             }
 
@@ -67,7 +68,7 @@ public class GuildAudioManager implements IGuildAudioManager {
             public void playlistLoaded(AudioPlaylist playlist) {
                 if (isKeywordsFinal) {
                     AudioTrack track = playlist.getTracks().remove(0);
-                    track.setUserData(event.getUser().getName());
+                    track.setUserData(event.getUser().getId());
                     play(author, audioState, track);
                     event.getHook().sendMessage(":musical_note: Added to queue: " + track.getInfo().title).queue();
                     return;
@@ -75,7 +76,7 @@ public class GuildAudioManager implements IGuildAudioManager {
 
                 for (AudioTrack track : playlist.getTracks()) {
                     audioState.scheduler.queue(track);
-                    track.setUserData(event.getUser().getName());
+                    track.setUserData(event.getUser().getId());
                 }
                 String response = String.format(
                         ":musical_note: Added to queue: %s entries from %s", playlist.getTracks().size(), playlist.getName());
@@ -110,7 +111,7 @@ public class GuildAudioManager implements IGuildAudioManager {
             @Override
             public void trackLoaded(AudioTrack track) {
                 play(author, audioState, track);
-                track.setUserData(event.getAuthor().getName());
+                track.setUserData(event.getAuthor().getId());
                 event.getChannel().sendMessage(":musical_note: Added to queue: " + track.getInfo().title).queue();
             }
 
@@ -118,7 +119,7 @@ public class GuildAudioManager implements IGuildAudioManager {
             public void playlistLoaded(AudioPlaylist playlist) {
                 if (isKeywordsFinal) {
                     AudioTrack track = playlist.getTracks().remove(0);
-                    track.setUserData(event.getAuthor().getName());
+                    track.setUserData(event.getAuthor().getId());
                     play(author, audioState, track);
                     event.getChannel().sendMessage(":musical_note: Added to queue: " + track.getInfo().title).queue();
                     return;
@@ -126,7 +127,7 @@ public class GuildAudioManager implements IGuildAudioManager {
 
                 for (AudioTrack track : playlist.getTracks()) {
                     audioState.scheduler.queue(track);
-                    track.setUserData(event.getAuthor().getName());
+                    track.setUserData(event.getAuthor().getId());
                 }
                 String response = String.format(
                         ":musical_note: Added to queue: %s entries from %s", playlist.getTracks().size(), playlist.getName());
