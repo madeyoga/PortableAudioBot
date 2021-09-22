@@ -5,7 +5,7 @@ Completely free Music Discord bot designed to be portable and easy for anyone to
 **Project is still in early access, bugs are to be expected.**
 
 
-## Feature
+## Features
 - Support slash command
 - Portable executable
 - Supported formats: https://github.com/sedmelluq/lavaplayer#supported-formats
