@@ -6,10 +6,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 public class SearchCommandResponseWaiter extends ListenerAdapter {
     private final GuildAudioManager audioManager;
@@ -60,8 +58,9 @@ public class SearchCommandResponseWaiter extends ListenerAdapter {
     private boolean isValidArguments(String arguments) {
         if (arguments == null) return false;
         try {
-            Integer.parseInt(arguments);
-        } catch (NumberFormatException exception) {
+            int entryNumber = Integer.parseInt(arguments);
+            if (entryNumber < 1 || entryNumber > 5) return false;
+        } catch (Exception exception) {
             return false;
         }
         return true;
