@@ -24,7 +24,7 @@ public class SkipCommand extends SlashCommand {
 
         audioState.scheduler.nextTrack();
 
-        event.reply(":musical_notes: Added to queue: " + audioState.player.getPlayingTrack().getInfo().title)
+        event.reply(":musical_notes: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
                 .queue();
     }
 
@@ -38,7 +38,7 @@ public class SkipCommand extends SlashCommand {
 
         audioState.scheduler.nextTrack();
 
-        event.getChannel().sendMessage(":musical_notes: Added to queue: "
+        event.getChannel().sendMessage(":musical_notes: Now playing: "
                 + audioState.player.getPlayingTrack().getInfo().title).queue();
     }
 }
