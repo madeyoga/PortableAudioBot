@@ -18,10 +18,7 @@ public class JoinCommand extends SlashCommand {
     public void execute(SlashCommandEvent event) {
         event.deferReply().queue();
         Member author = event.getMember();
-        if (author == null) {
-            event.getHook().sendMessage("This command can only be used in guild").queue();
-            return;
-        }
+        if (author.getVoiceState().getChannel() == null) return;
         GuildAudioManager.connectToAuthorVoiceChannel(author);
         event.getHook().sendMessage("Joined " + author.getVoiceState().getChannel().getName()).queue();
     }
@@ -29,10 +26,7 @@ public class JoinCommand extends SlashCommand {
     @Override
     public void execute(MessageReceivedEvent event, String arguments) {
         Member author = event.getMember();
-        if (author == null) {
-            event.getChannel().sendMessage("This command can only be used in guild").queue();
-            return;
-        }
+        if (author.getVoiceState().getChannel() == null) return;
         GuildAudioManager.connectToAuthorVoiceChannel(author);
         event.getChannel().sendMessage("Joined " + author.getVoiceState().getChannel().getName()).queue();
     }

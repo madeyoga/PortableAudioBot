@@ -32,7 +32,7 @@ public class YoutubeSearchCommand extends SlashCommand {
 
     @Override
     public void execute(SlashCommandEvent event) {
-        if (event.getMember().getVoiceState() == null) return;
+        if (event.getMember().getVoiceState().getChannel() == null) return;
 
         event.deferReply().queue();
 
@@ -65,7 +65,7 @@ public class YoutubeSearchCommand extends SlashCommand {
                     String row = String.format("\n%d. **%s** [%s]", i + 1, track.getInfo().title,
                             TimeFormatter.getDurationFormat(track.getDuration()));
                     builder.append(row);
-                    if (i == 6) break;
+                    if (i == 4) break;
                 }
                 builder.append("\n\n_Respond the entry number to start playing_");
                 event.getHook().sendMessage(builder.toString()).queue();
@@ -115,7 +115,7 @@ public class YoutubeSearchCommand extends SlashCommand {
                     String row = String.format("\n%d. **%s** [%s]", i + 1, track.getInfo().title,
                             TimeFormatter.getDurationFormat(track.getDuration()));
                     builder.append(row);
-                    if (i == 6) break;
+                    if (i == 4) break;
                 }
                 builder.append("\n\n_Respond the entry number to start playing_");
                 event.getChannel().sendMessage(builder.toString()).queue();

@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import utilities.EventValidator;
 
 public class PauseCommand extends SlashCommand {
     final private GuildAudioManager audioManager;
@@ -19,12 +20,14 @@ public class PauseCommand extends SlashCommand {
 
     @Override
     public void execute(SlashCommandEvent event) {
+        if (!EventValidator.isVoiceStatesValid(event, audioManager)) return;
         pause(event.getGuild());
         event.reply(":pause_button: Paused").queue();
     }
 
     @Override
     public void execute(MessageReceivedEvent event, String arguments) {
+        if (!EventValidator.isVoiceStatesValid(event, audioManager)) return;
         pause(event.getGuild());
         event.getChannel().sendMessage(":pause_button: Paused").queue();
     }

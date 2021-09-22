@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import utilities.EventValidator;
 
 public class StopCommand extends SlashCommand {
     private final GuildAudioManager audioManager;
@@ -20,13 +21,14 @@ public class StopCommand extends SlashCommand {
 
     @Override
     public void execute(SlashCommandEvent event) {
+        if (!EventValidator.isValidAuthorVoice(event)) return;
         VoiceChannel selfVoiceChannel = event.getGuild().getSelfMember().getVoiceState().getChannel();
         if (selfVoiceChannel == null) {
             event.reply(":x: | I'm currently not in a voice channel").queue();
             return;
         }
+
         event.deferReply().queue();
-        event.getGuild().getAudioManager().closeAudioConnection();
 
         stopAndLeaveVoice(event.getGuild());
 
@@ -35,12 +37,12 @@ public class StopCommand extends SlashCommand {
 
     @Override
     public void execute(MessageReceivedEvent event, String arguments) {
+        if (!EventValidator.isValidAuthorVoice(event)) return;
         VoiceChannel selfVoiceChannel = event.getGuild().getSelfMember().getVoiceState().getChannel();
         if (selfVoiceChannel == null) {
             event.getChannel().sendMessage(":x: | I'm currently not in a voice channel").queue();
             return;
         }
-        event.getGuild().getAudioManager().closeAudioConnection();
 
         stopAndLeaveVoice(event.getGuild());
 
@@ -48,6 +50,7 @@ public class StopCommand extends SlashCommand {
     }
 
     private void stopAndLeaveVoice(Guild guild) {
+        guild.getAudioManager().closeAudioConnection();
         GuildAudioState audioState = audioManager.getAudioState(guild);
         audioState.player.destroy();
         audioState.scheduler.getQueue().clear();
