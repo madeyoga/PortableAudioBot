@@ -53,7 +53,6 @@ public class SlashCommandListener extends ListenerAdapter {
         if (event.getUser().isBot()) return;
         SlashCommand command = commandMap.getOrDefault(event.getName(), null);
         if (command != null) {
-            // check guild only
             if (!event.isFromGuild() && command.isGuildOnly()) return;
 
             command.execute(event);
@@ -66,7 +65,6 @@ public class SlashCommandListener extends ListenerAdapter {
         if (!buttonEventHandler.verifyComponentId(componentId)) return;
         String commandName = buttonEventHandler.getCommandName(componentId);
 
-        // verify command name
         SlashCommand command = commandMap.getOrDefault(commandName, null);
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
