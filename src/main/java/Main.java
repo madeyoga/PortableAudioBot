@@ -21,6 +21,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter your bot token: ");
         String botToken = scanner.nextLine();
+        scanner.close();
 
         JDABuilder builder = JDABuilder.createDefault(botToken);
         configureMemoryUsage(builder);
@@ -32,13 +33,13 @@ public class Main {
         slashCommandListener.addSlashCommand(new SayCommand());
         slashCommandListener.addSlashCommand(new PingCommand());
         slashCommandListener.addSlashCommand(new JoinCommand());
-        slashCommandListener.addSlashCommand(new PlayCommand(audioManager));
-        slashCommandListener.addSlashCommand(new StopCommand(audioManager));
         slashCommandListener.addSlashCommand(new NowPlayingCommand(audioManager));
         slashCommandListener.addSlashCommand(new PauseCommand(audioManager));
-        slashCommandListener.addSlashCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter));
+        slashCommandListener.addSlashCommand(new PlayCommand(audioManager));
         slashCommandListener.addSlashCommand(new ShuffleQueueCommand(audioManager));
-        slashCommandListener.addSlashCommand(new VolumeCommand(audioManager));
+        slashCommandListener.addSlashCommand(new SkipCommand(audioManager));
+        slashCommandListener.addSlashCommand(new StopCommand(audioManager));
+        slashCommandListener.addSlashCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter));
 
         builder.addEventListeners(searchCommandWaiter);
         builder.addEventListeners(slashCommandListener);
