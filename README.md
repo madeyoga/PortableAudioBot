@@ -5,16 +5,14 @@
 
 Completely free Music Discord bot designed to be portable and easy for anyone to host on their own machine.
 
-
-
 **Project is still in early access, bugs are to be expected.**
 
 
 ## Features
 - Support slash command
 - Portable executable
-- Supported formats: https://github.com/sedmelluq/lavaplayer#supported-formats
 - Support 'search & pick to play'
+- Supported formats: https://github.com/sedmelluq/lavaplayer#supported-formats
 
 
 ## Command List
@@ -34,7 +32,7 @@ Completely free Music Discord bot designed to be portable and easy for anyone to
 Run bot on your local machine
 - Register and create your bot application on Discord Developer Portal https://discord.com/developers/applications
 - Under OAuth2 tab, reveal Client Secret, copy and save it somewhere else. This token later will be used to login to your bot application, keep it secret.
-- Under OAuth2 tab and scopes section, check `bot` option and under bot permissions, check the permission you wanna give to your bot.
+- Under OAuth2 tab and scopes section, check `bot` option and under bot permissions, check the permission you wanna give to your bot. Use the url to invite your bot to your server.
 - Download Portable bot from [release](https://github.com/madeyoga/PortableAudioBot/releases).
 - Extract rar and run `PortableBotAudio.exe`.
 - There will be a console asking you to input a bot token, paste your token there and press enter.
