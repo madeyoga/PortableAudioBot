@@ -52,7 +52,7 @@ There are 2 ways to run PortableAudioBot:
 - Using the executable jar file.
 
 ## Using executable from PortableAudioBot.zip
-Recommended for users that don't have Java installed.
+Recommended for Windows users and don't have Java installed.
 - Download `PortableAudioBot.zip` from [release](https://github.com/madeyoga/PortableAudioBot/releases/tag/v0.0.2) or simply [click here](https://github.com/madeyoga/PortableAudioBot/releases/download/v0.0.2/PortableAudioBot.zip).
 - Extract the zip file, and open the `settings.txt` file
 - Replace the dummy token `xxxxxxxxx` with your bot token. You can also change the prefix, by default the prefix is `!`.
