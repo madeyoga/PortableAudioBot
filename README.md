@@ -24,18 +24,41 @@ Completely free Music Discord bot designed to be portable and easy for anyone to
 - shuffle
 - skip
 - stop
-- volume
 - search
 
 
 ## Getting started
-Run bot on your local machine
+Create your bot on Discord Developer Portal:
 - Register and create your bot application on Discord Developer Portal https://discord.com/developers/applications
 - Under OAuth2 tab, reveal Client Secret, copy and save it somewhere else. This token later will be used to login to your bot application, keep it secret.
 - Under OAuth2 tab and scopes section, check `bot` option and under bot permissions, check the permission you wanna give to your bot. Use the url to invite your bot to your server.
-- Download Portable bot from [release](https://github.com/madeyoga/PortableAudioBot/releases).
-- Extract rar and run `PortableBotAudio.exe`.
-- There will be a console asking you to input a bot token, paste your token there and press enter.
+
+There are 2 ways to run PortableAudioBot:
+- Using executable file or
+- Using the executable jar file.
+
+## Using executable from PortableAudioBot.zip
+Recommended for users that don't have Java installed.
+- Download `PortableAudioBot.zip` from [release](https://github.com/madeyoga/PortableAudioBot/releases/tag/v0.0.2) or simply [click here](https://github.com/madeyoga/PortableAudioBot/releases/download/v0.0.2/PortableAudioBot.zip).
+- Extract the zip file, and open the `settings.txt` file
+- Replace the dummy token `xxxxxxxxx` with your bot token. You can also change the prefix, by default the prefix is `!`.
+- Run the bot by simply double click the executable file `PortableBot.exe`
+- If there is no error, you will see this output:
+```sh
+[main] INFO JDA - Login Successful!
+[JDA MainWS-WriteThread] INFO WebSocketClient - Connected to WebSocket
+[JDA MainWS-ReadThread] INFO JDA - Finished Loading!
+```
+- Go to Discord and you should see your bot online.
+
+
+## Using the executable jar file
+Recommended for users that already know Java or already have Java installed
+- Download the `PortableAudioBot.main.jar` and the `settings.txt` file from [release](https://github.com/madeyoga/PortableAudioBot/releases/latest/).
+- Put them in the same folder.
+- Open up `settings.txt`. You will see a dummy token and a default prefix `!`.
+  - Replace the `xxxxxxxxxxx` with your bot token.
+- Next, open up command line on your bot directory & run the jar file with `java -jar PortableAudioBot.main.jar`
 - If there is no error, you will see this output:
 ```sh
 [main] INFO JDA - Login Successful!
