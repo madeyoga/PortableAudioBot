@@ -4,6 +4,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -15,10 +16,11 @@ import java.util.List;
 public class ShuffleQueueCommand extends Command {
     private final GuildAudioManager audioManager;
 
-    public ShuffleQueueCommand(GuildAudioManager audioManager) {
+    public ShuffleQueueCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.commandData = new CommandData("shuffle", "Shuffles current queue state");
+        this.category = category;
     }
 
     @Override

@@ -3,6 +3,7 @@ package commands.music;
 import interactions.Command;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
@@ -13,10 +14,11 @@ import utilities.EventValidator;
 public class StopCommand extends Command {
     private final GuildAudioManager audioManager;
 
-    public StopCommand(GuildAudioManager audioManager) {
+    public StopCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.commandData = new CommandData("stop", "Stop playing music and leave voice channel");
+        this.category = category;
     }
 
     @Override

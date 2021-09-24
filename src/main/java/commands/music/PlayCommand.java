@@ -2,6 +2,7 @@ package commands.music;
 
 import interactions.Command;
 import guild.GuildAudioManager;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
@@ -12,14 +13,14 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 public class PlayCommand extends Command {
     GuildAudioManager audioManager;
 
-    public PlayCommand(GuildAudioManager audioManager) {
+    public PlayCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.guildOnly = true;
         this.audioManager = audioManager;
-
         this.commandData = new CommandData("play","Joins your voice channel and starts playing")
                 .addOptions(new OptionData(OptionType.STRING,
                     "query","Query can be an url or keywords", true)
                 );
+        this.category = category;
     }
 
     @Override

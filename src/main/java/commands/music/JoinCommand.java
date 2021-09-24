@@ -2,6 +2,7 @@ package commands.music;
 
 import interactions.Command;
 import guild.GuildAudioManager;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,9 +10,10 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 public class JoinCommand extends Command {
 
-    public JoinCommand() {
+    public JoinCommand(CommandCategory category) {
         this.guildOnly = true;
         this.commandData = new CommandData("join", "Join author voice channel");
+        this.category = category;
     }
 
     @Override
