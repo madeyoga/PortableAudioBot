@@ -2,13 +2,13 @@ package commands.music;
 
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
-import interactions.SlashCommand;
+import interactions.Command;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import utilities.EventValidator;
 
-public class SkipCommand extends SlashCommand {
+public class SkipCommand extends Command {
     private final GuildAudioManager audioManager;
 
     public SkipCommand(GuildAudioManager audioManager) {
@@ -28,9 +28,9 @@ public class SkipCommand extends SlashCommand {
         }
 
         audioState.scheduler.nextTrack();
-
-        event.reply(":musical_note: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
-                .queue();
+        if (audioState.player.getPlayingTrack() != null)
+            event.reply(":musical_note: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
+                    .queue();
     }
 
     @Override
@@ -41,13 +41,14 @@ public class SkipCommand extends SlashCommand {
         String userId = (String) audioState.player.getPlayingTrack().getUserData();
 
         if (!userId.equals(event.getAuthor().getId())) {
-            event.getChannel().sendMessage(":x: Only current audio requester can skip");
+            event.getChannel().sendMessage(":x: Only current audio requester can skip").queue();
             return;
         }
 
         audioState.scheduler.nextTrack();
 
-        event.getChannel().sendMessage(":musical_note: Now playing: "
-                + audioState.player.getPlayingTrack().getInfo().title).queue();
+        if (audioState.player.getPlayingTrack() != null)
+            event.getChannel().sendMessage(":musical_note: Now playing: "
+                    + audioState.player.getPlayingTrack().getInfo().title).queue();
     }
 }

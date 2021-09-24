@@ -1,13 +1,13 @@
 package commands.music;
 
-import interactions.SlashCommand;
+import interactions.Command;
 import guild.GuildAudioManager;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public class JoinCommand extends SlashCommand {
+public class JoinCommand extends Command {
 
     public JoinCommand() {
         this.guildOnly = true;

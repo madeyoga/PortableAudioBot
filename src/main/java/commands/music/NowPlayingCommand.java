@@ -3,12 +3,12 @@ package commands.music;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
-import interactions.SlashCommand;
+import interactions.Command;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public class NowPlayingCommand extends SlashCommand {
+public class NowPlayingCommand extends Command {
     final GuildAudioManager audioManager;
 
     public NowPlayingCommand(GuildAudioManager audioManager) {

@@ -12,10 +12,12 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class AudioTrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final BlockingQueue<AudioTrack> queue;
+    private boolean repeatMode;
 
     public AudioTrackScheduler(AudioPlayer player) {
         this.player = player;
         this.queue = new LinkedBlockingDeque<>();
+        this.repeatMode = false;
     }
 
     public void queue(AudioTrack track) {
@@ -48,6 +50,10 @@ public class AudioTrackScheduler extends AudioEventAdapter {
         if (endReason.mayStartNext) {
             nextTrack();
         }
+
+        if (this.repeatMode) {
+            queue(track.makeClone());
+        }
     }
 
     @Override
@@ -67,5 +73,13 @@ public class AudioTrackScheduler extends AudioEventAdapter {
 
     public BlockingQueue<AudioTrack> getQueue() {
         return queue;
+    }
+
+    public boolean isRepeatMode() {
+        return repeatMode;
+    }
+
+    public void setRepeatMode(boolean repeatMode) {
+        this.repeatMode = repeatMode;
     }
 }

@@ -1,6 +1,6 @@
 package commands.music;
 
-import interactions.SlashCommand;
+import interactions.Command;
 import guild.GuildAudioManager;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-public class PlayCommand extends SlashCommand {
+public class PlayCommand extends Command {
     GuildAudioManager audioManager;
 
     public PlayCommand(GuildAudioManager audioManager) {
