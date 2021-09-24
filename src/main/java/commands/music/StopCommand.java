@@ -1,6 +1,6 @@
 package commands.music;
 
-import interactions.SlashCommand;
+import interactions.Command;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import net.dv8tion.jda.api.entities.Guild;
@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import utilities.EventValidator;
 
-public class StopCommand extends SlashCommand {
+public class StopCommand extends Command {
     private final GuildAudioManager audioManager;
 
     public StopCommand(GuildAudioManager audioManager) {

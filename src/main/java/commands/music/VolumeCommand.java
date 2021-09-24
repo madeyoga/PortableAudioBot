@@ -2,14 +2,14 @@ package commands.music;
 
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
-import interactions.SlashCommand;
+import interactions.Command;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public class VolumeCommand extends SlashCommand {
+public class VolumeCommand extends Command {
     private final GuildAudioManager audioManager;
 
     public VolumeCommand(GuildAudioManager audioManager) {

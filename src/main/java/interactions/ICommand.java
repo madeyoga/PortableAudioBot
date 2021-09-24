@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public interface ISlashCommand {
+public interface ICommand {
     void execute(SlashCommandEvent event);
     void execute(MessageReceivedEvent event, String arguments);
     void onButtonClick(ButtonClickEvent event);

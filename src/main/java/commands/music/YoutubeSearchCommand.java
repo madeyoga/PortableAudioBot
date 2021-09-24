@@ -6,7 +6,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
-import interactions.SlashCommand;
+import interactions.Command;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -18,7 +18,7 @@ import waiter.SearchCommandWaitingState;
 import java.util.ArrayList;
 import java.util.List;
 
-public class YoutubeSearchCommand extends SlashCommand {
+public class YoutubeSearchCommand extends Command {
     private final GuildAudioManager audioManager;
     private final SearchCommandResponseWaiter waiter;
 

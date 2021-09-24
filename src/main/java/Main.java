@@ -4,7 +4,7 @@ import commands.music.*;
 import interactions.ButtonEventHandler;
 import exceptions.DuplicateCommandException;
 import guild.GuildAudioManager;
-import interactions.SlashCommandListener;
+import interactions.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -31,26 +31,26 @@ public class Main {
         GuildAudioManager audioManager = new GuildAudioManager();
         SearchCommandResponseWaiter searchCommandWaiter = new SearchCommandResponseWaiter(audioManager);
 
-        SlashCommandListener slashCommandListener = new SlashCommandListener(new ButtonEventHandler());
-        slashCommandListener.setPrefix(prefix);
-        slashCommandListener.addSlashCommand(new SayCommand());
-        slashCommandListener.addSlashCommand(new PingCommand());
-        slashCommandListener.addSlashCommand(new JoinCommand());
-        slashCommandListener.addSlashCommand(new NowPlayingCommand(audioManager));
-        slashCommandListener.addSlashCommand(new PauseCommand(audioManager));
-        slashCommandListener.addSlashCommand(new PlayCommand(audioManager));
-        slashCommandListener.addSlashCommand(new RepeatModeCommand(audioManager));
-        slashCommandListener.addSlashCommand(new ShuffleQueueCommand(audioManager));
-        slashCommandListener.addSlashCommand(new SkipCommand(audioManager));
-        slashCommandListener.addSlashCommand(new StopCommand(audioManager));
-        slashCommandListener.addSlashCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter));
+        CommandListener commandListener = new CommandListener(new ButtonEventHandler());
+        commandListener.setPrefix(prefix);
+        commandListener.addCommand(new SayCommand());
+        commandListener.addCommand(new PingCommand());
+        commandListener.addCommand(new JoinCommand());
+        commandListener.addCommand(new NowPlayingCommand(audioManager));
+        commandListener.addCommand(new PauseCommand(audioManager));
+        commandListener.addCommand(new PlayCommand(audioManager));
+        commandListener.addCommand(new RepeatModeCommand(audioManager));
+        commandListener.addCommand(new ShuffleQueueCommand(audioManager));
+        commandListener.addCommand(new SkipCommand(audioManager));
+        commandListener.addCommand(new StopCommand(audioManager));
+        commandListener.addCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter));
 
         builder.addEventListeners(searchCommandWaiter);
-        builder.addEventListeners(slashCommandListener);
+        builder.addEventListeners(commandListener);
 
         // Build JDA
         JDA jda = builder.build();
-        slashCommandListener.queueCommands(jda);
+        commandListener.queueCommands(jda);
     }
 
     private static void configureMemoryUsage(JDABuilder builder) {

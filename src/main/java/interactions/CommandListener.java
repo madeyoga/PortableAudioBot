@@ -12,17 +12,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-public class SlashCommandListener extends ListenerAdapter {
-    protected Map<String, SlashCommand> commandMap;
+public class CommandListener extends ListenerAdapter {
+    protected Map<String, Command> commandMap;
     protected IButtonEventHandler buttonEventHandler;
     protected String prefix = "n.";
 
-    public SlashCommandListener(IButtonEventHandler buttonEventHandler) {
+    public CommandListener(IButtonEventHandler buttonEventHandler) {
         this.buttonEventHandler = buttonEventHandler;
         this.commandMap = new HashMap<>();
     }
 
-    public SlashCommandListener(IButtonEventHandler buttonEventHandler, Map<String, SlashCommand> commandMap) {
+    public CommandListener(IButtonEventHandler buttonEventHandler, Map<String, Command> commandMap) {
         this.buttonEventHandler = buttonEventHandler;
         this.commandMap = commandMap;
     }
@@ -40,7 +40,7 @@ public class SlashCommandListener extends ListenerAdapter {
             arguments = messageContent[1];
         }
 
-        SlashCommand command = commandMap.getOrDefault(commandName, null);
+        Command command = commandMap.getOrDefault(commandName, null);
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
 
@@ -51,7 +51,7 @@ public class SlashCommandListener extends ListenerAdapter {
     @Override
     public void onSlashCommand(@NotNull SlashCommandEvent event) {
         if (event.getUser().isBot()) return;
-        SlashCommand command = commandMap.getOrDefault(event.getName(), null);
+        Command command = commandMap.getOrDefault(event.getName(), null);
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
 
@@ -65,14 +65,14 @@ public class SlashCommandListener extends ListenerAdapter {
         if (!buttonEventHandler.verifyComponentId(componentId)) return;
         String commandName = buttonEventHandler.getCommandName(componentId);
 
-        SlashCommand command = commandMap.getOrDefault(commandName, null);
+        Command command = commandMap.getOrDefault(commandName, null);
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
             command.onButtonClick(event);
         }
     }
 
-    public void addSlashCommand(SlashCommand command) throws DuplicateCommandException {
+    public void addCommand(Command command) throws DuplicateCommandException {
         String commandName = command.getCommandData().getName();
 
         if (commandMap.containsKey(commandName)) {
@@ -82,7 +82,7 @@ public class SlashCommandListener extends ListenerAdapter {
         commandMap.put(commandName, command);
     }
 
-    public Map<String, SlashCommand> getCommandMap() {
+    public Map<String, Command> getCommandMap() {
         return commandMap;
     }
 

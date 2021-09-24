@@ -3,7 +3,7 @@ package interactions;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
-public abstract class SlashCommand implements ISlashCommand {
+public abstract class Command implements ICommand {
     protected boolean guildOnly = true;
     protected CommandData commandData;
 

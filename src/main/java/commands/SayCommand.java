@@ -1,6 +1,6 @@
 package commands;
 
-import interactions.SlashCommand;
+import interactions.Command;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.interactions.components.Button;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SayCommand extends SlashCommand {
+public class SayCommand extends Command {
 
     Map<String, String[]> signatureCache;
 
