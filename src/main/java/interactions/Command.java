@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 public abstract class Command implements ICommand {
     protected boolean guildOnly = true;
     protected CommandData commandData;
+    protected CommandCategory category;
 
     public boolean isGuildOnly() {
         return guildOnly;
@@ -22,7 +23,10 @@ public abstract class Command implements ICommand {
     }
 
     @Override
-    public void onButtonClick(ButtonClickEvent event) {
+    public void onButtonClick(ButtonClickEvent event) { }
 
+    @Override
+    public CommandCategory getCategory() {
+        return category;
     }
 }

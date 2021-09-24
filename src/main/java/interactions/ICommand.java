@@ -19,4 +19,5 @@ public interface ICommand {
      */
     String provideSignature(String userId, String choice);
     CommandData getCommandData();
+    CommandCategory getCategory();
 }
