@@ -41,7 +41,7 @@ public class SkipCommand extends Command {
         String userId = (String) audioState.player.getPlayingTrack().getUserData();
 
         if (!userId.equals(event.getAuthor().getId())) {
-            event.getChannel().sendMessage(":x: Only current audio requester can skip");
+            event.getChannel().sendMessage(":x: Only current audio requester can skip").queue();
             return;
         }
 
