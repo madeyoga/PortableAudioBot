@@ -1,14 +1,16 @@
 package commands;
 
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 
 public class PingCommand extends Command {
 
-    public PingCommand() {
+    public PingCommand(CommandCategory category) {
         this.commandData = new CommandData("ping", "Makes the bot says Pong!");
+        this.category = category;
     }
 
     @Override

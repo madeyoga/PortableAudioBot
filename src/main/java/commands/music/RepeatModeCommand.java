@@ -3,6 +3,7 @@ package commands.music;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -11,10 +12,11 @@ import utilities.EventValidator;
 public class RepeatModeCommand extends Command {
     private final GuildAudioManager audioManager;
 
-    public RepeatModeCommand(GuildAudioManager audioManager) {
+    public RepeatModeCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.commandData = new CommandData("repeat", "Audio track will be added to the queue again after it finished playing");
+        this.category = category;
     }
 
     @Override

@@ -3,6 +3,7 @@ package commands.music;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -12,10 +13,11 @@ import utilities.EventValidator;
 public class PauseCommand extends Command {
     final private GuildAudioManager audioManager;
 
-    public PauseCommand(GuildAudioManager audioManager) {
+    public PauseCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.commandData = new CommandData("pause", "Pause or unpause audio player");
+        this.category = category;
     }
 
     @Override

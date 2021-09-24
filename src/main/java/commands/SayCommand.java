@@ -1,6 +1,7 @@
 package commands;
 
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.ButtonClickEvent;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -13,15 +14,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SayCommand extends Command {
-
     Map<String, String[]> signatureCache;
 
-    public SayCommand() {
+    public SayCommand(CommandCategory category) {
         this.signatureCache = new HashMap<>();
         this.commandData = new CommandData("say","Makes the bot say what you tell it to")
                 .addOptions(new OptionData(OptionType.STRING,
                 "content","What the bot should say?", true)
                 );
+        this.category = category;
     }
 
     @Override

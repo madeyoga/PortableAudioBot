@@ -1,9 +1,11 @@
+import commands.HelpCommand;
 import commands.PingCommand;
 import commands.SayCommand;
 import commands.music.*;
 import interactions.ButtonEventHandler;
 import exceptions.DuplicateCommandException;
 import guild.GuildAudioManager;
+import interactions.CommandCategory;
 import interactions.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -25,6 +27,9 @@ public class Main {
         String prefix = scanner.nextLine().split(":", 2)[1].trim();
         scanner.close();
 
+        CommandCategory audioCategory = new CommandCategory("Audio");
+        CommandCategory generalCategory = new CommandCategory("General");
+
         JDABuilder builder = JDABuilder.createDefault(botToken);
         configureMemoryUsage(builder);
 
@@ -33,17 +38,18 @@ public class Main {
 
         CommandListener commandListener = new CommandListener(new ButtonEventHandler());
         commandListener.setPrefix(prefix);
-        commandListener.addCommand(new SayCommand());
-        commandListener.addCommand(new PingCommand());
-        commandListener.addCommand(new JoinCommand());
-        commandListener.addCommand(new NowPlayingCommand(audioManager));
-        commandListener.addCommand(new PauseCommand(audioManager));
-        commandListener.addCommand(new PlayCommand(audioManager));
-        commandListener.addCommand(new RepeatModeCommand(audioManager));
-        commandListener.addCommand(new ShuffleQueueCommand(audioManager));
-        commandListener.addCommand(new SkipCommand(audioManager));
-        commandListener.addCommand(new StopCommand(audioManager));
-        commandListener.addCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter));
+        commandListener.addCommand(new SayCommand(generalCategory));
+        commandListener.addCommand(new PingCommand(generalCategory));
+        commandListener.addCommand(new JoinCommand(audioCategory));
+        commandListener.addCommand(new NowPlayingCommand(audioManager, audioCategory));
+        commandListener.addCommand(new PauseCommand(audioManager, audioCategory));
+        commandListener.addCommand(new PlayCommand(audioManager, audioCategory));
+        commandListener.addCommand(new RepeatModeCommand(audioManager, audioCategory));
+        commandListener.addCommand(new ShuffleQueueCommand(audioManager, audioCategory));
+        commandListener.addCommand(new SkipCommand(audioManager, audioCategory));
+        commandListener.addCommand(new StopCommand(audioManager, audioCategory));
+        commandListener.addCommand(new YoutubeSearchCommand(audioManager, searchCommandWaiter, audioCategory));
+        commandListener.addCommand(new HelpCommand(commandListener.getCommandMap()));
 
         builder.addEventListeners(searchCommandWaiter);
         builder.addEventListeners(commandListener);

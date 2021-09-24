@@ -3,6 +3,7 @@ package commands.music;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -11,9 +12,10 @@ import utilities.EventValidator;
 public class SkipCommand extends Command {
     private final GuildAudioManager audioManager;
 
-    public SkipCommand(GuildAudioManager audioManager) {
+    public SkipCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.commandData = new CommandData("skip", "Skip current playing audio, only author can skip.");
+        this.category = category;
     }
 
     @Override

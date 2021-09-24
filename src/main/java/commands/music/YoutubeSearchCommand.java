@@ -7,6 +7,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -22,12 +23,14 @@ public class YoutubeSearchCommand extends Command {
     private final GuildAudioManager audioManager;
     private final SearchCommandResponseWaiter waiter;
 
-    public YoutubeSearchCommand(GuildAudioManager audioManager, SearchCommandResponseWaiter waiter) {
+    public YoutubeSearchCommand(GuildAudioManager audioManager, SearchCommandResponseWaiter waiter,
+                                CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.waiter = waiter;
         this.commandData = new CommandData("search", "Search by query from youtube")
                 .addOption(OptionType.STRING, "query", "a keywords", true);
+        this.category = category;
     }
 
     @Override

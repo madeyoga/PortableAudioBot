@@ -4,6 +4,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import guild.GuildAudioManager;
 import guild.GuildAudioState;
 import interactions.Command;
+import interactions.CommandCategory;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -11,10 +12,11 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 public class NowPlayingCommand extends Command {
     final GuildAudioManager audioManager;
 
-    public NowPlayingCommand(GuildAudioManager audioManager) {
+    public NowPlayingCommand(GuildAudioManager audioManager, CommandCategory category) {
         this.audioManager = audioManager;
         this.guildOnly = true;
         this.commandData = new CommandData("song", "Shows current playing audio");
+        this.category = category;
     }
 
     @Override
