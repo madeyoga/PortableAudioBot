@@ -20,7 +20,7 @@ A Music Discord bot designed to be portable and easy for anyone to setup and run
 ## Supported sources
 Supports all sources and formats supported by [lavaplayer](https://github.com/sedmelluq/lavaplayer#supported-formats):
 
-### Sites
+### Sources
 - YouTube
 - SoundCloud
 - Bandcamp
