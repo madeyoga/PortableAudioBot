@@ -14,13 +14,15 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import waiter.SearchCommandResponseWaiter;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws LoginException, DuplicateCommandException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter your bot token: ");
-        String botToken = scanner.nextLine();
+    public static void main(String[] args) throws LoginException, DuplicateCommandException, FileNotFoundException {
+        Scanner scanner = new Scanner(new File("settings.txt"));
+        String botToken = scanner.nextLine().split(":", 2)[1].trim();
+        String prefix = scanner.nextLine().split(":", 2)[1].trim();
         scanner.close();
 
         JDABuilder builder = JDABuilder.createDefault(botToken);
@@ -30,12 +32,14 @@ public class Main {
         SearchCommandResponseWaiter searchCommandWaiter = new SearchCommandResponseWaiter(audioManager);
 
         SlashCommandListener slashCommandListener = new SlashCommandListener(new ButtonEventHandler());
+        slashCommandListener.setPrefix(prefix);
         slashCommandListener.addSlashCommand(new SayCommand());
         slashCommandListener.addSlashCommand(new PingCommand());
         slashCommandListener.addSlashCommand(new JoinCommand());
         slashCommandListener.addSlashCommand(new NowPlayingCommand(audioManager));
         slashCommandListener.addSlashCommand(new PauseCommand(audioManager));
         slashCommandListener.addSlashCommand(new PlayCommand(audioManager));
+        slashCommandListener.addSlashCommand(new RepeatModeCommand(audioManager));
         slashCommandListener.addSlashCommand(new ShuffleQueueCommand(audioManager));
         slashCommandListener.addSlashCommand(new SkipCommand(audioManager));
         slashCommandListener.addSlashCommand(new StopCommand(audioManager));
