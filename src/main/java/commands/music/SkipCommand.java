@@ -28,9 +28,9 @@ public class SkipCommand extends Command {
         }
 
         audioState.scheduler.nextTrack();
-
-        event.reply(":musical_note: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
-                .queue();
+        if (audioState.player.getPlayingTrack() != null)
+            event.reply(":musical_note: Now playing: " + audioState.player.getPlayingTrack().getInfo().title)
+                    .queue();
     }
 
     @Override
@@ -47,7 +47,8 @@ public class SkipCommand extends Command {
 
         audioState.scheduler.nextTrack();
 
-        event.getChannel().sendMessage(":musical_note: Now playing: "
-                + audioState.player.getPlayingTrack().getInfo().title).queue();
+        if (audioState.player.getPlayingTrack() != null)
+            event.getChannel().sendMessage(":musical_note: Now playing: "
+                    + audioState.player.getPlayingTrack().getInfo().title).queue();
     }
 }
