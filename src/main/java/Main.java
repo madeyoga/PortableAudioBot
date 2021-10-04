@@ -2,6 +2,7 @@ import commands.HelpCommand;
 import commands.PingCommand;
 import commands.SayCommand;
 import commands.music.*;
+import exceptions.NullTokenException;
 import interactions.ButtonEventHandler;
 import exceptions.DuplicateCommandException;
 import guild.GuildAudioManager;
@@ -21,11 +22,37 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws LoginException, DuplicateCommandException, FileNotFoundException {
+    public static void main(String[] args) throws LoginException, DuplicateCommandException, FileNotFoundException,
+            NullTokenException {
         Scanner scanner = new Scanner(new File("settings.txt"));
-        String botToken = scanner.nextLine().split(":", 2)[1].trim();
-        String prefix = scanner.nextLine().split(":", 2)[1].trim();
+
+        String botToken = null;
+        String prefix = ".";
+        String ownerId = null;
+        while (scanner.hasNextLine()) {
+            String[] line = scanner.nextLine().split(":", 2);
+            if (line.length > 1) {
+                String key = line[0].trim();
+                switch (key) {
+                    case "token":
+                        botToken = line[1].trim();
+                        break;
+                    case "prefix":
+                        prefix = line[1].trim();
+                        break;
+                    case "ownerId":
+                        ownerId = line[1].trim();
+                        break;
+                }
+            }
+        }
+
         scanner.close();
+
+        if (botToken == null) {
+            throw new NullTokenException("Bot token is not detected. " +
+                    "Have you set your bot token in settings.txt? 'token: <yourtokenherexxxxx>'");
+        }
 
         CommandCategory audioCategory = new CommandCategory("Audio");
         CommandCategory generalCategory = new CommandCategory("General");
