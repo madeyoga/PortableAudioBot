@@ -43,6 +43,8 @@ public class Main {
                     case "ownerId":
                         ownerId = line[1].trim();
                         break;
+                    default:
+                        break;
                 }
             }
         }
