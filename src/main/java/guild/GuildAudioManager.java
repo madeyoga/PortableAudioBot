@@ -48,7 +48,7 @@ public class GuildAudioManager implements IGuildAudioManager {
         Member author = event.getMember();
 
         boolean isKeywords = false;
-        if (!query.startsWith("http")) {
+        if (!query.startsWith("http") && !query.startsWith("ytsearch:")) {
             query = "ytsearch:" + query;
             isKeywords = true;
         }
@@ -99,7 +99,7 @@ public class GuildAudioManager implements IGuildAudioManager {
         Member author = event.getMember();
 
         boolean isKeywords = false;
-        if (!query.startsWith("http")) {
+        if (!query.startsWith("http") && !query.startsWith("ytsearch:")) {
             query = "ytsearch:" + query;
             isKeywords = true;
         }

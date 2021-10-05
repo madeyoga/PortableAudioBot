@@ -44,7 +44,14 @@ public class CommandListener extends ListenerAdapter {
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
 
+            String authorId = event.getAuthor().getId();
+            if (isStillCooldown(command, authorId)) return;
+
             command.execute(event, arguments);
+
+            // update cooldown
+            if (command.cooldown > 0)
+                command.cooldownMap.put(authorId, System.currentTimeMillis() + (long) (command.cooldown * 1000));
         }
     }
 
@@ -54,8 +61,14 @@ public class CommandListener extends ListenerAdapter {
         Command command = commandMap.getOrDefault(event.getName(), null);
         if (command != null) {
             if (!event.isFromGuild() && command.isGuildOnly()) return;
+            String authorId = event.getUser().getId();
+            if (isStillCooldown(command, authorId)) return;
 
             command.execute(event);
+
+            // update cooldown
+            if (command.cooldown > 0)
+                command.cooldownMap.put(authorId, System.currentTimeMillis() + (long) (command.cooldown * 1000));
         }
     }
 
@@ -77,6 +90,10 @@ public class CommandListener extends ListenerAdapter {
 
         if (commandMap.containsKey(commandName)) {
             throw new DuplicateCommandException("Duplicate command with name '" + commandName + "'");
+        }
+
+        if (command.cooldown > 0) {
+            command.cooldownMap = new HashMap<>();
         }
 
         commandMap.put(commandName, command);
@@ -113,5 +130,21 @@ public class CommandListener extends ListenerAdapter {
         });
 
         commands.addCommands(commandDataCollection).queue();
+    }
+
+    private boolean isStillCooldown(Command command, String authorId) {
+        // if command has cooldown
+        if (command.cooldown > 0) {
+            // check user cooldown
+            if (command.cooldownMap.containsKey(authorId)) {
+                long cooldownEndsTime = command.cooldownMap.get(authorId);
+
+                // if still cooldown
+                if (System.currentTimeMillis() < cooldownEndsTime) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

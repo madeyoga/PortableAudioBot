@@ -21,6 +21,7 @@ public class HelpCommand extends Command {
 //                        "Use this parameter to get command description", false);
         this.commandMap = commandMap;
         this.addDataToEmbedBuilder();
+        this.cooldown = 4;
     }
 
     @Override
